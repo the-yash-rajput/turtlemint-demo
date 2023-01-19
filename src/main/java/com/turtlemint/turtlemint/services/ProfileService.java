@@ -3,6 +3,7 @@ package com.turtlemint.turtlemint.services;
 import com.turtlemint.turtlemint.model.Profile;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProfileService {
 
@@ -10,7 +11,7 @@ public interface ProfileService {
 
     boolean addProfile(Profile profile);
 
-    List<Profile> singleProfile(String requestId);
+    Optional<Profile> singleProfile(String requestId);
 
     String deleteProfile(String requestId);
 

@@ -37,8 +37,9 @@ public class CustomerServiceImplementatoin implements CustomerService{
     public boolean modifyCustomer(String customerCheckoutId, Customer customer){
         try {
             customerRepo.deleteByCustomerCheckoutId(customerCheckoutId);
-            customerRepo.save(customer);
-            return true;
+            if(addCustomer(customer)==true)
+                return true;
+            else return false;
         }
         catch (Exception e){
             return false;

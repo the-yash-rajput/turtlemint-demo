@@ -14,5 +14,7 @@ public class Customer {
     private String customerEmail;
     private String customerPhone;
     private String customerCheckoutId;
+    private String requestId;
+
 }
 

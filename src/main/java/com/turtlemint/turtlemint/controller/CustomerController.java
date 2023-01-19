@@ -1,6 +1,7 @@
 package com.turtlemint.turtlemint.controller;
 
 import com.turtlemint.turtlemint.model.Customer;
+import com.turtlemint.turtlemint.model.Profile;
 import com.turtlemint.turtlemint.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,17 +18,26 @@ public class CustomerController {
     public CustomerService customerService;
 
     @GetMapping("/customer")
-    public ResponseEntity<List<Customer>> showAllCustomer() throws Exception{
+    public ResponseEntity<?> showAllCustomer() throws Exception{
         try {
-            return new ResponseEntity<>(this.customerService.allCustomer(), HttpStatus.ACCEPTED);
+            List<Customer> allCustomer=this.customerService.allCustomer();
+            if(allCustomer.size()!=0) {
+                return new ResponseEntity<>(this.customerService.allCustomer(), HttpStatus.ACCEPTED);
+            }
+            else{
+                return new ResponseEntity<>("NO data to display", HttpStatus.ACCEPTED);
+            }
         }
         catch(Exception e) {
-            return new ResponseEntity<>(this.customerService.allCustomer(),HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>("Ran into some exception",HttpStatus.EXPECTATION_FAILED);
         }
     }
 
     @PostMapping(value = "/customer")
     public ResponseEntity<?> addCustomer(@RequestBody Customer customer)throws Exception{
+        if(customer.getCustomerEmail()==null || customer.getCustomerCheckoutId()==null || customer.getCustomerName()==null || customer.getCustomerPhone()==null || customer.getRequestId()==null){
+            return new ResponseEntity<>("Null value found",HttpStatus.BAD_REQUEST);
+        }
         if(customerService.addCustomer(customer)==true) {
             return new  ResponseEntity<>(customer, HttpStatus.CREATED);
         }

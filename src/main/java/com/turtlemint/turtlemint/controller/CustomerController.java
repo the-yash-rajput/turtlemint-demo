@@ -1,7 +1,6 @@
 package com.turtlemint.turtlemint.controller;
 
 import com.turtlemint.turtlemint.model.Customer;
-import com.turtlemint.turtlemint.model.Profile;
 import com.turtlemint.turtlemint.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

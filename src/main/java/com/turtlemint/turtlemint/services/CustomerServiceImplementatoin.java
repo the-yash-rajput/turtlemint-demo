@@ -1,7 +1,6 @@
 package com.turtlemint.turtlemint.services;
 
 import com.turtlemint.turtlemint.model.Customer;
-import com.turtlemint.turtlemint.model.Profile;
 import com.turtlemint.turtlemint.repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

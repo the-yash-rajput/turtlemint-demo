@@ -1,13 +1,12 @@
 
 package com.turtlemint.turtlemint.controller;
 
+import com.turtlemint.turtlemint.model.DummyQuotations;
 import com.turtlemint.turtlemint.model.Quotation;
 import com.turtlemint.turtlemint.model.QuotationData;
 import com.turtlemint.turtlemint.services.QuotationService;
-import com.turtlemint.turtlemint.services.QuotationServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +34,21 @@ public class QuotationController {
             return new ResponseEntity<>("Ran into Exception", HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+    @PostMapping("/quotations")
+    public ResponseEntity<?> addQuotationsData(@RequestBody DummyQuotations dummyQuotations){
+        try{
+            if(quotationService.addQuotationsData(dummyQuotations)==true){
+                return new ResponseEntity<>("Entry Successful", HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>("Entry Failded", HttpStatus.EXPECTATION_FAILED);
+            }
+        }
+        catch (Exception e){
+            return new ResponseEntity<>("Ran into Exception", HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
 
 }

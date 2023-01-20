@@ -31,4 +31,14 @@ public class QuotationServiceImplementation implements QuotationService{
 
         return dummyQuotationRepo.findAllByVerticalAndMakeAndModel(quotation.getVertical(), quotation.getVehicleMake(), quotation.getVehicleModel());
     }
+    @Override
+    public boolean addQuotationsData(DummyQuotations dummyQuotations){
+        try {
+            dummyQuotationRepo.save(dummyQuotations);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
 }

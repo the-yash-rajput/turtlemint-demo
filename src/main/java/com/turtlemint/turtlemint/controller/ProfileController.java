@@ -39,14 +39,16 @@ public class ProfileController {
         if(profile.getVehicleMake()==null || profile.getVehicleModel()==null || profile.getVertical()==null){
             return new ResponseEntity<>("Null Value Found", HttpStatus.BAD_REQUEST);
         }
-        if(profile.getVertical()!="TW" || profile.getVertical()!="FW"){
+        if(profile.getVertical().equals("TW") || profile.getVertical().equals("FW")) {
+            boolean status = profileService.addProfile(profile);
+            if (status == true) {
+                return new ResponseEntity<>(profile, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>(profile, HttpStatus.EXPECTATION_FAILED);
+        }
+        else{
             return new ResponseEntity<>("Wrong Vertical Type",HttpStatus.BAD_REQUEST);
         }
-        boolean status= profileService.addProfile(profile);
-        if(status==true) {
-            return new  ResponseEntity<>(profile, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(profile, HttpStatus.EXPECTATION_FAILED);
     }
 
     @GetMapping(value = "/profile/{id}")
